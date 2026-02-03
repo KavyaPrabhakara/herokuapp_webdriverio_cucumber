@@ -1,0 +1,29 @@
+{
+  "loginData": [
+    {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "result": "success"
+    },
+    {
+      "username": "invalid_user",
+      "password": "wrong_password",
+      "result": "error",
+      "errorMessage": "Epic sadface: Username and password do not match any user in this service"
+    }
+  ],
+  
+  "dropdownData": [
+    {
+      "option": "Option 2"
+    }
+  ],
+
+  "dynamicLoading": 
+     {
+    "expectedText": "Hello World!"
+   }
+  
+}
+
+
