@@ -1,4 +1,5 @@
 const Page = require('./page');
+const waitUtils = require('../../utils/waitUtils');
 
 class DropdownPage extends Page {
   get dropdown() { return $('#dropdown'); }
@@ -8,7 +9,7 @@ class DropdownPage extends Page {
   }
 
   async selectOption(optionText) {
-    await this.dropdown.waitForDisplayed({ timeout: 5000 });
+    await waitUtils.waitForDisplayed(this.dropdown);
     await this.dropdown.selectByVisibleText(optionText);
   }
 

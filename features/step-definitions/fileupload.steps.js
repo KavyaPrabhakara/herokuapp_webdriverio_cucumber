@@ -2,7 +2,7 @@ const { Given, When, Then } = require('@wdio/cucumber-framework');
 const { expect } = require('@wdio/globals');
 const FileUploadPage = require('../pageobjects/fileupload.page.js');
 
-const FILE_NAME = 'test-data.txt';
+const FILE_NAME = 'fileUpload.txt';
 
 Given('user is on file upload page', async () => {
   await FileUploadPage.open();

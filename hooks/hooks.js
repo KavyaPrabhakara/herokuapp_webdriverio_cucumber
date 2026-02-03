@@ -7,10 +7,18 @@ Before(async function () {
 });
 
 After(async function (scenario) {
-  if (scenario.result.status === 'FAILED') {
+  const status = scenario.result.status;
+
+  // 🔹 Group scenarios in Allure
+  if (status === 'PASSED') {
+    allure.addLabel('statusGroup', 'Passed Scenarios');
+  } 
+  else if (status === 'FAILED') {
+    allure.addLabel('statusGroup', 'Failed Scenarios');
+
+    // 🔹 Take screenshot only on failure
     const screenshot = await browser.takeScreenshot();
 
-    // Attach screenshot to Allure
     allure.addAttachment(
       'Failure Screenshot',
       Buffer.from(screenshot, 'base64'),
@@ -18,3 +26,6 @@ After(async function (scenario) {
     );
   }
 });
+
+
+

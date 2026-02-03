@@ -1,4 +1,5 @@
 const Page = require('./page');
+const waitUtils = require('../../utils/waitUtils');
 
 class DynamiccontentPage extends Page {
   get startBtn() { return $('#start button'); }
@@ -10,13 +11,13 @@ class DynamiccontentPage extends Page {
   }
 
   async startLoading() {
-    await this.startBtn.waitForClickable({ timeout: 5000 });
+    await waitUtils.waitForClickable(this.startBtn);
     await this.startBtn.click();
   }
 
   async waitForContentToLoad() {
-    await this.loadingText.waitForDisplayed({ reverse: true, timeout: 10000 });
-    await this.loadedText.waitForDisplayed({ timeout: 5000 });
+    await waitUtils.waitForNotDisplayed(this.loadingText);
+    await waitUtils.waitForDisplayed(this.loadedText);
   }
 
   async getLoadedText() {

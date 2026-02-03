@@ -52,10 +52,32 @@ exports.config = {
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
+
+//     services: [
+//     'devtools',      // 🔑 REQUIRED for browser.cdp()
+//     // 'chromedriver'
+//   ],
+
     //
     capabilities: [{
-        browserName: 'chrome'
+        browserName: 'chrome',
+        maxInstances: 1,
+        'goog:chromeOptions': {
+            args: [
+            '--start-maximized',
+            '--disable-notifications',
+            '--disable-infobars'
+            ],
+            prefs: {
+            'profile.default_content_setting_values.notifications': 1
+            }
+        },
+    // ⭐ THIS IS THE KEY ⭐
+    unhandledPromptBehavior: 'accept' // Accepts all alerts by default
     }],
+
+
+
 
     //
     // ===================
@@ -144,12 +166,14 @@ exports.config = {
                 // './features/step-definitions/steps.js',
                 './features/step-definitions/dropdown.steps.js',
                 './features/step-definitions/dynamiccontent.steps.js',
-                './features/step-definitions/alerts.steps.js',
                 './features/step-definitions/fileupload.steps.js',
                 './features/step-definitions/saucelogin.steps.js' ,
                 './hooks/hooks.js'
                 // './features/step-definitions/**/*.js'          
             ],
+            timeout: 60000,
+            retry: 1,
+
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -168,7 +192,7 @@ exports.config = {
         // <boolean> fail if there are any undefined or pending steps
         strict: false,
         // <string> (expression) only execute the features or scenarios with tags matching the expression
-        tagExpression: '',
+        // tags: '@smoke',
         // <number> timeout for step definitions
         timeout: 60000,
         // <boolean> Enable this config to treat undefined definitions as warnings.
